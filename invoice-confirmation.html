@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title></title>
+
+  <style type="text/css">
+  </style>    
+</head>
+<body style="margin:0; padding:0; background-color:#ffffff;">
+  <center>
+    <table width="60%" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
+        <tr>
+                <img style="margin: 5px 0 25px 0;" src="http://www.duosecurity.com/static/images/recurly-email-logo.png" />
+        </tr>
+        <tr style="box-shadow:#999 0px 1px 5px;">
+            <td align="center" height="100%" valign="center" width="100%">
+              <!--[if (gte mso 9)|(IE)]>
+              <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+              <tr>
+              <td align="center" valign="top" width="600">
+              <![endif]-->
+                <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;" bgcolor="#ffffff">
+                  <tr>
+                    <td align="center" valign="top" style="font-size:14px;">
+      
+
+                        <p style="color: #242837;font-size: 18px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; margin: 0 0 5px 0;"><strong>Payment Confirmation</strong></p>
+                        <p style="color: #242837;font-size: 18px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0 0 25px 0;">Thank you for your recent payment of <strong>{{{invoice_total_paid}}}</strong>.</p>
+                  
+                        <p style="color: #808390;font-size: 13px; font-family: Helvetica, Arial, sans-serif; font-weight:bold; margin: 0 0 1px 0;">ACCOUNT</p>
+                        <p style="color: #242837;font-size: 15px; font-family: Helvetica, Arial, sans-serif; font-weight:bold; margin: 0 0 14px 0;">{{account_company_name}}</p>
+                  
+                        {{#subscription_active?}}
+                  
+                        <p style="color: #808390;font-size: 13px; font-family: Helvetica, Arial, sans-serif; font-weight:bold; margin: 0 0 2px 0;">PLAN</p>
+                        <p style="color: #242837;font-size: 15px; font-family: Helvetica, Arial, sans-serif; font-weight:bold; margin: 0 0 14px 0;">{{plan_name}} ({{{subscription_subtotal_amount}}})</p>
+                  
+                        <p style="color: #808390;font-size: 13px; font-family: Helvetica, Arial, sans-serif; font-weight:bold; margin: 0 0 2px 0;">NEXT PAYMENT</p>
+                        <p style="color: #242837;font-size: 15px; font-family: Helvetica, Arial, sans-serif; font-weight:bold; margin: 0 0 14px 0;">{{subscription_next_payment_date}}</p>
+                  
+                        {{/subscription_active?}}
+                  
+                        <p style="color: #808390;font-size: 13px; font-family: Helvetica, Arial, sans-serif; font-weight:bold; margin: 0 0 6px 0;">DETAILS</p>
+                  
+                        <table id="invoice-table" width="100%" cellpadding="5" cellspacing="0" style="margin-bottom: 20px;">
+                          <thead>
+                            <tr bgcolor="#242837">
+                              <th align="left"  style="color: #ccc;font-family: Helvetica, Arial, sans-serif; font-size:12px;"><strong>Date</strong></th>
+                              <th align="left"  style="color: #ccc;font-family: Helvetica, Arial, sans-serif; font-size:12px"><strong>Description</strong></th>
+                              <th align="right" style="color: #ccc;font-family: Helvetica, Arial, sans-serif; font-size:12px" width="30"><strong>Amount</strong></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          {{#invoice_line_items}}
+                          <tr>
+                            <td align="left" valign="top" style="color: #808390;border-bottom: 1px solid #f3f3f3;font-family: Helvetica, Arial, sans-serif;font-size:12px;">
+                              {{{line_date}}}
+                            </td>
+                            <td align="left" valign="top" style="color: #242837;border-bottom: 1px solid #f3f3f3;font-family: Helvetica, Arial, sans-serif;font-size:12px;">
+                              {{line_description}}
+                              {{^line_quantity_is_one?}}
+                               (&times;{{line_quantity}})
+                              {{/line_quantity_is_one?}}
+                            </td>
+                            <td align="right" valign="top" width="30" style="color: #242837;border-bottom: 1px solid #f3f3f3;font-family: Helvetica, Arial, sans-serif;font-size:12px;">
+                              <strong>{{{line_amount}}}</strong>
+                            </td>
+                          </tr>
+                          {{/invoice_line_items}}
+                          {{#invoice_has_discount?}}
+                          <tr>
+                            <td align="left" valign="top" style="color: #808390;border-bottom: 1px solid #f3f3f3;font-family: Helvetica, Arial, sans-serif;font-size:12px;">
+                            </td>
+                            <td align="left" valign="top" style="color: #242837;border-bottom: 1px solid #f3f3f3;font-family: Helvetica, Arial, sans-serif;font-size:12px;">
+                              Discount
+                            </td>
+                            <td align="right" valign="top" width="30" style="color: #242837;border-bottom: 1px solid #f3f3f3;font-family: Helvetica, Arial, sans-serif;font-size:12px;">
+                              <strong>{{{invoice_discount_amount}}}</strong>
+                            </td>
+                          </tr>
+                          {{/invoice_has_discount?}}
+                          </tbody>
+                          <tfoot>
+                            <tr>
+                              <td align="right" colspan="2" style="color: #242837;border-bottom: 1px solid #f3f3f3;font-family: Helvetica, Arial, sans-serif;font-size:12px;">
+                                Subtotal
+                              </td>
+                              <td align="right" width="30" style="color: #242837;border-bottom: 1px solid #f3f3f3;font-family: Helvetica, Arial, sans-serif;font-size:12px;">
+                                <strong>{{{invoice_subtotal}}}</strong>
+                              </td>
+                            </tr>
+                            {{#invoice_has_vat?}}
+                            <tr>
+                              <td align="right" colspan="2" style="color: #242837;border-bottom: 1px solid #f3f3f3;font-family: Helvetica, Arial, sans-serif;font-size:12px;">
+                                VAT
+                              </td>
+                              <td align="right" width="30" style="color: #242837;border-bottom: 1px solid #f3f3f3;font-family: Helvetica, Arial, sans-serif;font-size:12px;">
+                                <strong>{{{invoice_tax_amount}}}</strong>
+                              </td>
+                            </tr>
+                            {{/invoice_has_vat?}}
+                            <tr style="border-bottom: 1px solid #f3f3f3;">
+                              <td align="right" colspan="2" style="color: #242837;border-bottom: 1px solid #f3f3f3;font-family: Helvetica, Arial, sans-serif;font-size:12px;">
+                                Paid
+                              </td>
+                              <td align="right" width="30" style="color: #242837;border-bottom: 1px solid #f3f3f3;font-family: Helvetica, Arial, sans-serif;font-size:12px;">
+                                <strong>{{{invoice_total_paid}}}</strong>
+                              </td>
+                            </tr>
+                            <tr id="invoice-total" bgcolor="#F3F3F3" style="border-bottom: 1px solid #808390;">
+                              <td align="right" colspan="2" style="color: #242837;border-bottom: 1px solid #808390;font-family: Helvetica, Arial, sans-serif;font-size:12px;">
+                                <strong>Total</strong>
+                              </td>
+                              <td align="right" width="30" style="color: #242837;border-bottom: 1px solid #808390;font-family: Helvetica, Arial, sans-serif;font-size:12px;">
+                                <strong>{{{invoice_total_due}}}</strong>
+                              </td>
+                            </tr>
+                          </tfoot>
+                        </table>
+                  
+                        <p style="font-size: 13px; font-family: Helvetica, Arial, sans-serif; font-weight:bold; margin: 0 0 1px 0; color: #777;">BILLING INFO</p>
+                        <p style="font-size: 15px; font-family: Helvetica, Arial, sans-serif; font-weight:normal; margin: 0 0 14px 0;">
+                          <strong>{{billing_full_name}}</strong><br />
+                          {{{billing_full_address}}}
+                        </p>
+                  
+                        <!-- Footer -->
+                        <p style="font-size: 15px; font-family: Helvetica, Arial, sans-serif; margin: 30px 0 0 0;">Log into your account here: <a href="https://admin.duosecurity.com">https://admin.duosecurity.com</a></p>
+                        <p style="font-size: 15px; font-family: Helvetica, Arial, sans-serif;"><strong>Questions?</strong> Reply to this email or call us at 1 (855) 386-2884</p>
+      
+                      <table width="200" height="44" cellpadding="0" cellspacing="0" border="0" bgcolor="#2b3a63" style="border-radius:4px;">
+                        <tr>
+                          <td align="center" valign="middle" height="44" style="font-family: Arial, sans-serif; font-size:14px; font-weight:bold;">
+                              <a href="#" target="_blank" style="font-family: Arial, sans-serif; color:#ffffff; display: inline-block; text-decoration: none; line-height:44px; width:200px; font-weight:bold;">Button</a>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              <!--[if (gte mso 9)|(IE)]>
+              </td>
+              </tr>
+              </table>
+              <![endif]-->
+            </td>
+          </tr>
+    </table>
+  </center>
+</body>
+</html>

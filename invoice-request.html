@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title></title>
+
+  <style type="text/css">
+  </style>    
+</head>
+<body style="margin:0; padding:0; background-color:#ffffff;">
+  <center>
+    <table width="60%" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
+        <tr>
+                <img style="margin: 5px 0 25px 0;" src="http://www.duosecurity.com/static/images/recurly-email-logo.png" />
+        </tr>
+        <tr style="box-shadow:#999 0px 1px 5px;">
+            <td align="center" height="100%" valign="center" width="100%">
+              <!--[if (gte mso 9)|(IE)]>
+              <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+              <tr>
+              <td align="center" valign="top" width="600">
+              <![endif]-->
+
+<!-- account-info -->
+<table id="account-info" width="100%" cellpadding="0" cellspacing="0"
+  bgcolor="#F3F3F3"
+  style="border-top: 3px solid #CCCCCC;border-bottom: 3px solid #CCCCCC;">
+  <tr>
+    <td valign="top" align="center">
+      <table width="600" cellpadding="0" border="0" cellspacing="0">
+        <tr>
+          <td>
+            <p style="float: right; font-size:12px; text-align:right">
+            Billed on: <strong>{{invoice_date}}</strong>
+            <br />Due on: <strong>{{invoice_due_at}}</strong>
+            {{#invoice_po_number}}
+            <br />PO Number: <strong>{{invoice_po_number}}</strong>
+            {{/invoice_po_number}}
+            {{#invoice_net_terms}}
+            <br />Terms: <strong>Net-{{invoice_net_terms}}</strong>
+            {{/invoice_net_terms}}
+            </p>
+
+            <h2 style="font-size:16px;text-align:left">Invoice
+              {{invoice_number}}</h2>
+
+            <p style="font-size: 12px;text-align:left">
+            <strong>{{billing_full_name}}</strong><br />
+            {{{billing_full_address}}} </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table><!-- /account-info -->
+
+<table width="100%" cellpadding="10" cellspacing="0">
+  <tr>
+    <td valign="top" align="center">
+      <table width="600" cellpadding="0" border="0" cellspacing="0">
+        <tr>
+          <td>
+            <h1 style="font-size:20px;text-align:left">You have a new invoice</h1>
+
+            <table width="100%" cellpadding="0" cellspacing="0"
+                   style="margin-bottom: 10px">
+              <tr>
+                <td width="320" id="message-body" align="left"
+                  valign="middle" style="font-size:12px;">
+                  <!-- message-body -->
+                  <p>You have a new invoice from {{company_name}},
+                  due on {{invoice_due_at}}.
+                  </p>
+                  <p>
+                  Please contact {{company_name}} at
+                  {{company_email}} to make payment arrangements.
+                  </p>
+                  {{#company_hosted_account_management_enabled?}}
+                  <p>
+                    {{#company_hosted_account_management_allow_pay_invoice?}}
+                    <a href="{{invoice_guest_view_url}}">Pay your invoice online.</a>
+                    {{/company_hosted_account_management_allow_pay_invoice?}}
+                    {{^company_hosted_account_management_allow_pay_invoice?}}
+                    <a href="{{invoice_guest_view_url}}">View your invoice online.</a>
+                    {{/company_hosted_account_management_allow_pay_invoice?}}
+                  </p>
+                  {{/company_hosted_account_management_enabled?}}
+
+                  <!-- /message-body -->
+                </td>
+                <td width="20">&nbsp;</td>
+                <td width="260" align="right" valign="top">
+                  {{#subscription_active?}}
+                  <!-- message-details -->
+                  <div style="background: #f3f3f3;border-radius: 1.5em;-moz-border-radius: 1.5em;-webkit-border-radius: 1.5em;padding: 1.5em 20px;width:260px;margin: 1em 0;text-align:left;">
+                    <p style="font-size:12px">
+                    Total due:<br />
+                    <strong style="font-size:14px">{{{invoice_total_due}}}</strong>
+                    </p>
+
+                    <p style="font-size:12px">
+                    Due on:<br />
+                    <strong style="font-size:14px">{{invoice_due_at}}</strong>
+                    </p>
+                  </div>
+                  <!-- /message-details -->
+                  {{/subscription_active?}}
+                </td>
+              </tr>
+            </table>
+
+            <!-- invoice-table -->
+            <table id="invoice-table" width="100%" cellpadding="4"
+              cellspacing="0">
+              <!-- table headers -->
+              <thead>
+                <tr bgcolor="#CCCCCC">
+                  <th align="left" style="font-size:12px"><strong>Date</strong>
+                  </th>
+                  <th align="left" style="font-size:12px"><strong>Description</strong>
+                  </th>
+                  <th align="right" width="20"
+                    style="font-size:12px">
+                    <strong>Amount</strong></th>
+                </tr>
+              </thead>
+              <!-- table data -->
+              <tbody>
+                {{#invoice_line_items}}
+                <tr>
+                  <td align="left" valign="top"
+                    style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
+                    {{{line_date}}}
+                  </td>
+                  <td align="left" valign="top"
+                    style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
+                    {{line_description}}
+                    {{^line_quantity_is_one?}}
+                    (x {{line_quantity}})
+                    {{/line_quantity_is_one?}}
+                  </td>
+                  <td align="right" valign="top" width="20"
+                    style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
+                    <strong>{{{line_amount}}}</strong></td>
+                </tr>
+                {{/invoice_line_items}}
+              </tbody>
+              <!-- table footer -->
+              <tfoot>
+                <tr>
+                  <td align="right" colspan="2"
+                    style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
+                    <strong>Subtotal:</strong></td>
+                  <td align="right" width="20"
+                    style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
+                    <strong>{{{invoice_subtotal}}}</strong></td>
+                </tr>
+                {{#invoice_has_discount?}}
+                <tr style="border-bottom: 1px solid #f3f3f3;">
+                  <td align="right" colspan="2"
+                    style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
+                    <strong>Discount:</strong></td>
+                  <td align="right" width="20"
+                    style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
+                    <strong>{{{invoice_discount_amount}}}</strong>
+                  </td>
+                </tr>
+                {{/invoice_has_discount?}}
+                {{#invoice_has_tax?}}
+                <tr>
+                  <td align="right" colspan="2"
+                    style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
+                    <strong>
+                      {{#invoice_has_vat?}}VAT:{{/invoice_has_vat?}}
+                      {{^invoice_has_vat?}}
+                        {{invoice_tax_region}} Tax {{invoice_tax_rate}}:
+                      {{/invoice_has_vat?}}
+                    </strong>
+                  </td>
+                  <td align="right" width="20"
+                    style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
+                    <strong>{{{invoice_tax_amount}}}</strong>
+                  </td>
+                </tr>
+                {{/invoice_has_tax?}}
+                <tr style="border-bottom: 1px solid #f3f3f3;">
+                  <td align="right" colspan="2"
+                    style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
+                    <strong>Total:</strong></td>
+                  <td align="right" width="20"
+                    style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
+                    <strong>{{{invoice_total}}}</strong>
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid #f3f3f3;">
+                  <td align="right" colspan="2"
+                    style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
+                    <strong>Paid:</strong></td>
+                  <td align="right" width="20"
+                    style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
+                    <strong>{{{invoice_total_paid}}}</strong>
+                  </td>
+                </tr>
+                <tr id="invoice-total" bgcolor="#F3F3F3"
+                  style="border-bottom: 1px solid #cccccc;">
+                  <td align="right" colspan="2"
+                    style="border-bottom: 1px solid #cccccc;font-size:12px;">
+                    <strong>Total due:</strong></td>
+                  <td align="right" width="20"
+                    style="border-bottom: 1px solid #cccccc;font-size:12px;">
+                    <strong>{{{invoice_total_due}}}</strong>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+   <!--[if (gte mso 9)|(IE)]>
+              </td>
+              </tr>
+              </table>
+              <![endif]-->
+            </td>
+        </tr>
+  </table>
+</center>
+</body>
+</html>
